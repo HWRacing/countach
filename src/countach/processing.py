@@ -1,3 +1,5 @@
+import fileops
+
 # Take the whole a2l file and extract the lines containing measurement or characteristic sections
 def linesToSections(lines):
 	# Whether or not the current line is inside a section
@@ -92,7 +94,7 @@ def convertSection(sectionLines):
 	return output
 
 def extractData(file):
-	lines = importFile(file)
+	lines = fileops.importFile(file)
 	sections = linesToSections(lines)
 	output = []
 	for section in sections:
