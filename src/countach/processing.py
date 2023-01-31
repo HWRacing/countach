@@ -78,3 +78,15 @@ def convertCSection(sectionLines):
 			output["Upper Limit"] = float(line[4])
 	
 	return output
+
+def convertSection(sectionLines):
+	sectionType = sectionLines[0].split()[1]
+	output = {}
+	if sectionType == "CHARACTERISTIC":
+		output = convertCSection(sectionLines)
+	elif sectionType == "MEASUREMENT":
+		output = convertMSection(sectionLines)
+	else:
+		raise RuntimeError("convertSecion only accepts CHARACTERISTIC or MEASUREMENT sections")
+	
+	return output
