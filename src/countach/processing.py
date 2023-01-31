@@ -90,3 +90,11 @@ def convertSection(sectionLines):
 		raise RuntimeError("convertSecion only accepts CHARACTERISTIC or MEASUREMENT sections")
 	
 	return output
+
+def extractData(file):
+	lines = importFile(file)
+	sections = linesToSections(lines)
+	output = []
+	for section in sections:
+		output.append(convertSection(section))
+	return output
