@@ -18,6 +18,7 @@ def linesToSections(lines):
 		
 		if inSection:
 			currentOutput.append(line)
+
 	return output
 
 def convertMSection(sectionLines):
@@ -46,6 +47,7 @@ def convertMSection(sectionLines):
 			output["Upper Limit"] = float(line[4])
 		elif line[0] == "ECU_ADDRESS":
 			output["Address"] = int(line[1], 16)
+	
 	return output
 
 def convertCSection(sectionLines):
@@ -74,4 +76,5 @@ def convertCSection(sectionLines):
 			output["Lower Limit"] = float(line[4])
 		elif line[1] == "Upper":
 			output["Upper Limit"] = float(line[4])
+	
 	return output
