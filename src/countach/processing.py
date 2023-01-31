@@ -19,3 +19,31 @@ def linesToSections(lines):
 		if inSection:
 			currentOutput.append(line)
 	return output
+
+def convertMSection(sectionLines):
+	output = {}
+	for rawline in sectionLines:
+		line = rawline.split()
+
+		if line[1] == "Name":
+			output['Name'] = line[3]
+		elif line[1] == "Long":
+			if line[4] == '""':
+				output["Long Identifier"] = ""
+			else:	
+				output["Long Identifier"] = line[4]
+		elif line[1] == "Data":
+			output["Type"] = line[4]
+		elif line[1] == "Conversion":
+			output["Conversion Method"] = line[4]
+		elif line[1] == "Resolution":
+			output["Resolution"] = int(line[5])
+		elif line[1] == "Accuracy":
+			output["Accuracy"] = int(line[5])
+		elif line[1] == "Lower":
+			output["Lower Limit"] = float(line[4])
+		elif line[1] == "Upper":
+			output["Upper Limit"] = float(line[4])
+		elif line[0] == "ECU_ADDRESS":
+			output["Address"] = int(line[1], 16)
+	return output
