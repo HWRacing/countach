@@ -24,7 +24,7 @@ def linesToSections(lines):
 	return output
 
 def convertMSection(sectionLines):
-	output = {}
+	output = {"Category": "Measurement"}
 	for rawline in sectionLines:
 		line = rawline.split()
 
@@ -53,7 +53,7 @@ def convertMSection(sectionLines):
 	return output
 
 def convertCSection(sectionLines):
-	output = {}
+	output = {"Category": "Characteristic"}
 	for rawline in sectionLines:
 		line = rawline.split()
 
