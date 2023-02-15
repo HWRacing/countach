@@ -1,5 +1,6 @@
 output = [
 	{
+		'Category': 'Characteristic',
 		'Name': 'read_1',
 		'Long Identifier': '',
 		'Type': 'VALUE',
@@ -11,6 +12,7 @@ output = [
 		'Upper Limit': 3.4e+38
 	},
 	{
+		'Category': 'Measurement',
 		'Name': 'write_1',
 		'Long Identifier': '',
 		'Type': 'FLOAT32_IEEE',
@@ -21,6 +23,7 @@ output = [
 		'Address': 1073774596
 	},
 	{
+		'Category': 'Measurement',
 		'Name': 'write_2',
 		'Long Identifier': '',
 		'Type': 'UBYTE',
@@ -32,6 +35,7 @@ output = [
 		'Address': 1073774600
 	}, 
 	{
+		'Category': 'Measurement',
 		'Name': 'PwrM_flgKeyOnDelay',
 		'Long Identifier': '',
 		'Type': 'UBYTE',
@@ -43,6 +47,7 @@ output = [
 		'Address': 1073774592
 	},
 	{
+		'Category': 'Measurement',
 		'Name': 'PwrM_flgKeyOnRaw',
 		'Long Identifier': '',
 		'Type': 'UBYTE',
