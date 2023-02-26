@@ -1,4 +1,5 @@
 from .processing import *
+from .fixed import decodeFixedTypeString
 
 def getTypeFromRawString(rawString):
 	typeList = [
@@ -18,4 +19,6 @@ def getTypeFromRawString(rawString):
 	
 	# Handle fixed types
 	if "fix" in rawString:
-		raise NotImplementedError("Cannot handle fixed-point data types yet")
+		return decodeFixedTypeString(rawString)
+
+	raise ValueError(f"{rawString} does not contain a valid type")
