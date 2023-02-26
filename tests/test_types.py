@@ -25,4 +25,4 @@ def test_getTypeFromRawString_boolean():
 	assert t.getTypeFromRawString("VCU_CM_boolean") == "boolean"
 
 def test_getTypeFromRawString_fixed():
-	assert t.getTypeFromRawString("VCU_CM_sfix16_E5_B1") == "sf16s32b1"
+	assert t.getTypeFromRawString("VCU_CM_sfix16_E5_B1") == "sf16S32B1"
