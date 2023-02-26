@@ -58,6 +58,15 @@ def _getFixedTypeParameters(typeString):
 	return signed, wordLength, totalSlope, bias
 
 def decodeFixedTypeString(rawString):
+	if rawString[0] != "s" and rawString[0] != "u":
+		if "_sfix" in rawString:
+			startIndex = rawString.index("_sfix") + 1
+		elif "_ufix" in rawString:
+			startIndex = rawString.index("_ufix") + 1
+		else:
+			raise ValueError(f"String {rawString} is not a valid fixdt")
+		rawString = rawString[startIndex:]
+	
 	signed, wordLength, totalSlope, bias = _getFixedTypeParameters(rawString)
 	# Convert the boolean of signed into a letter
 	if signed:
