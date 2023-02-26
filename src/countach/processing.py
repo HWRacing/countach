@@ -1,8 +1,8 @@
-from .fileops import *
+from .fileops import _importFile
 from .types import getTypeFromRawString
 
 # Take the whole a2l file and extract the lines containing measurement or characteristic sections
-def linesToSections(lines):
+def _linesToSections(lines):
 	# Whether or not the current line is inside a section
 	inSection = False
 	output = []
@@ -24,7 +24,7 @@ def linesToSections(lines):
 
 	return output
 
-def convertMSection(sectionLines):
+def _convertMSection(sectionLines):
 	output = {"Category": "Measurement"}
 	for rawline in sectionLines:
 		line = rawline.split()
@@ -53,7 +53,7 @@ def convertMSection(sectionLines):
 	
 	return output
 
-def convertCSection(sectionLines):
+def _convertCSection(sectionLines):
 	output = {"Category": "Characteristic"}
 	for rawline in sectionLines:
 		line = rawline.split()
@@ -82,22 +82,22 @@ def convertCSection(sectionLines):
 	
 	return output
 
-def convertSection(sectionLines):
+def _convertSection(sectionLines):
 	sectionType = sectionLines[0].split()[1]
 	output = {}
 	if sectionType == "CHARACTERISTIC":
-		output = convertCSection(sectionLines)
+		output = _convertCSection(sectionLines)
 	elif sectionType == "MEASUREMENT":
-		output = convertMSection(sectionLines)
+		output = _convertMSection(sectionLines)
 	else:
 		raise RuntimeError("convertSecion only accepts CHARACTERISTIC or MEASUREMENT sections")
 	
 	return output
 
 def extractData(file):
-	lines = importFile(file)
-	sections = linesToSections(lines)
+	lines = _importFile(file)
+	sections = _linesToSections(lines)
 	output = []
 	for section in sections:
-		output.append(convertSection(section))
+		output.append(_convertSection(section))
 	return output
