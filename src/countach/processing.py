@@ -1,5 +1,5 @@
 from .fileops import _importFile
-from .typeDecoding import getTypeFromRawString
+from .types import getTypeDict
 
 # Take the whole a2l file and extract the lines containing measurement or characteristic sections
 def _linesToSections(lines):
@@ -39,7 +39,7 @@ def _convertMSection(sectionLines):
 		elif line[1] == "Data":
 			output["VCU Type"] = line[4]
 		elif line[1] == "Conversion":
-			output["Type"] = getTypeFromRawString(line[4])
+			output["Type"] = getTypeDict(line[4])
 		elif line[1] == "Resolution":
 			output["Resolution"] = int(line[5])
 		elif line[1] == "Accuracy":
@@ -74,7 +74,7 @@ def _convertCSection(sectionLines):
 		elif line[1] == "Maximum":
 			output["Maximum Difference"] = int(line[4])
 		elif line[1] == "Conversion":
-			output["Type"] = getTypeFromRawString(line[4])
+			output["Type"] = getTypeDict(line[4])
 		elif line[1] == "Lower":
 			output["Lower Limit"] = float(line[4])
 		elif line[1] == "Upper":
