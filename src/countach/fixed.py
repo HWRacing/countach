@@ -70,14 +70,10 @@ def getFixedDict(rawString):
 		rawString = rawString[startIndex:]
 	
 	signed, wordLength, totalSlope, bias = _getFixedTypeParameters(rawString)
-	# Convert the boolean of signed into a letter
-	if signed:
-		signedString = "s"
-	else:
-		signedString = "u"
 	
 	result = {
 		"Name": "fixdt",
+		"Signed": signed,
 		"Bits": wordLength,
 		"Total Slope": totalSlope,
 		"Bias": bias
