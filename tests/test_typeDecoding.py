@@ -1,4 +1,4 @@
-import src.countach.types as t
+import src.countach.typeDecoding as t
 
 def test_getTypeFromRawString_uint8():
 	assert t.getTypeFromRawString("VCU_CM_uint8") == "uint8"
