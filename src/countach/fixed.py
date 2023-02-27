@@ -57,7 +57,9 @@ def _getFixedTypeParameters(typeString):
 	bias = _getBias(typeString)
 	return signed, wordLength, totalSlope, bias
 
-def decodeA2LFixed(rawString):
+# Given a string describing a fixed-point data type from an A2L file,
+# returns a dictionary describing the type
+def getFixedDict(rawString):
 	if rawString[0] != "s" and rawString[0] != "u":
 		if "_sfix" in rawString:
 			startIndex = rawString.index("_sfix") + 1
@@ -74,7 +76,11 @@ def decodeA2LFixed(rawString):
 	else:
 		signedString = "u"
 	
-	return f"{signedString}f{wordLength}S{totalSlope}B{bias}"
+	result = {
+		"Name": "fixdt",
+		"Bits": wordLength,
+		"Total Slope": totalSlope,
+		"Bias": bias
+	}
 
-
-
+	return result
