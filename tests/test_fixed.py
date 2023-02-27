@@ -36,4 +36,10 @@ def test_getFixedTypeParameters():
 	assert fx._getFixedTypeParameters("sfix16_E4_B1") == (True, 16, 16, 1)
 
 def test_decodeA2LFixed():
-	assert fx.decodeA2LFixed("sfix16_E5_B1") == "sf16S32B1"
+	assert fx.getFixedDict("sfix16_E5_B1") == {
+		"Name": "fixdt",
+		"Signed": True,
+		"Bits": 16,
+		"Total Slope": 32,
+		"Bias": 1
+	}
