@@ -35,5 +35,5 @@ def test_getBias_unspec():
 def test_getFixedTypeParameters():
 	assert fx._getFixedTypeParameters("sfix16_E4_B1") == (True, 16, 16, 1)
 
-def test_decodeFixedTypeString():
-	assert fx.decodeFixedTypeString("sfix16_E5_B1") == "sf16S32B1"
+def test_decodeA2LFixed():
+	assert fx.decodeA2LFixed("sfix16_E5_B1") == "sf16S32B1"
