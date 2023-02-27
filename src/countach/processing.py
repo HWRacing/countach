@@ -1,5 +1,5 @@
 from .fileops import _importFile
-from .types import getTypeFromRawString
+from .typeDecoding import getTypeFromRawString
 
 # Take the whole a2l file and extract the lines containing measurement or characteristic sections
 def _linesToSections(lines):
