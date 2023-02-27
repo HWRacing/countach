@@ -27,4 +27,10 @@ def test_getTypeDict_boolean():
 	assert t.getTypeDict("VCU_CM_boolean") == data.types["boolean"]
 
 def test_getTypeDict_fixed():
-	assert t.getTypeDict("VCU_CM_sfix16_E5_B1") == data.types["sf16S32B1"]
+	assert t.getTypeDict("VCU_CM_sfix16_E5_B1") == {
+		"Name": "fixdt",
+		"Signed": True,
+		"Bits": 16,
+		"Total Slope": 32,
+		"Bias": 1
+	}
