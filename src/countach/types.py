@@ -1,5 +1,5 @@
 from .processing import *
-from .fixed import decodeFixedTypeString
+from .fixed import decodeA2LFixed
 
 def getTypeFromRawString(rawString):
 	typeList = [
@@ -19,6 +19,6 @@ def getTypeFromRawString(rawString):
 	
 	# Handle fixed types
 	if "fix" in rawString:
-		return decodeFixedTypeString(rawString)
+		return decodeA2LFixed(rawString)
 
 	raise ValueError(f"{rawString} does not contain a valid type")

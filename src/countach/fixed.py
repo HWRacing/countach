@@ -57,7 +57,7 @@ def _getFixedTypeParameters(typeString):
 	bias = _getBias(typeString)
 	return signed, wordLength, totalSlope, bias
 
-def decodeFixedTypeString(rawString):
+def decodeA2LFixed(rawString):
 	if rawString[0] != "s" and rawString[0] != "u":
 		if "_sfix" in rawString:
 			startIndex = rawString.index("_sfix") + 1
@@ -75,3 +75,6 @@ def decodeFixedTypeString(rawString):
 		signedString = "u"
 	
 	return f"{signedString}f{wordLength}S{totalSlope}B{bias}"
+
+
+
