@@ -1,4 +1,4 @@
-from .fileops import _importFile
+from countach import fileops
 from .types import getTypeDict
 
 # Take the whole a2l file and extract the lines containing measurement or characteristic sections
@@ -95,7 +95,7 @@ def _convertSection(sectionLines):
 	return output
 
 def extractData(file):
-	lines = _importFile(file)
+	lines = fileops.importFile(file)
 	sections = _linesToSections(lines)
 	output = []
 	for section in sections:
