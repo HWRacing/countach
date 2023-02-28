@@ -1,4 +1,4 @@
-from countach import fileops, types
+from countach import fileops, types # fileops import works fine, but types one doesn't
 
 # Take the whole a2l file and extract the lines containing measurement or characteristic sections
 def _linesToSections(lines):
