@@ -1,4 +1,4 @@
-from .fixed import getFixedDict
+from countach import fixed # Broken import
 
 # Given a type string from an A2L file, returns a dictionary describing the type
 def getTypeDict(typeName):
@@ -59,7 +59,7 @@ def getTypeDict(typeName):
 			"Encoding": "float"
 		}
 	elif "fix" in typeName:
-		result = getFixedDict(typeName)
+		result = fixed.getFixedDict(typeName)
 	else:
 		raise ValueError(f"No valid type found in {typeName}")
 	
