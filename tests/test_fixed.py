@@ -1,22 +1,22 @@
 from countach import fixed
 
 def test_extractInitialInt():
-    pass
+	pass
 
 def test_checkIfFixedIsSigned():
-    pass
+	pass
 
 def test_getWordLength():
-    pass
+	pass
 
 def test_getTotalSlope():
-    pass
+	pass
 
 def test_getBias():
-    pass
+	pass
 
 def test_getFixedTypeParameters():
-    pass
+	pass
 
 def test_decodeFixedTypeString():
-    pass
+	pass
