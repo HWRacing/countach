@@ -25,3 +25,7 @@ def _linesToSections(lines):
 			currentOutput.append(line)
 
 	return output
+
+def fileToSections(fileName):
+	lines = _importFile(fileName)
+	return _linesToSections(lines)
