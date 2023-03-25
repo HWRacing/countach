@@ -1,4 +1,40 @@
-output = [
+from countach import measurement, characteristic
+
+def dictToCharac(n):
+	output = characteristic.Characteristic()
+	output.name = n["Name"]
+	output.longIdentifier = n["Long Identifier"]
+	output.vcuType = n["VCU Type"]
+	output.address = n["Address"]
+	output.recordLayout = n["Record Layout"]
+	output.maxDifference = n["Maximum Difference"]
+	output.dataType = n["Type"]
+	output.lowerLimit = n["Lower Limit"]
+	output.upperLimit = n["Upper Limit"]
+	return output
+
+def dictToMeas(n):
+	output = measurement.Measurement
+	output.name = n["Name"]
+	output.longIdentifier = n["Long Identifier"]
+	output.vcuType = n["VCU Type"]
+	output.dataType = n["Type"]
+	output.resolution = n["Resolution"]
+	output.accuracy = n["Accuracy"]
+	output.lowerLimit = n["Lower Limit"]
+	output.upperLimit = n["Upper Limit"]
+	output.address = n["Address"]
+	return output
+
+def dictToClass(dictVersion):
+	if dictVersion["Category"] == "Characteristic":
+		return dictToCharac(dictVersion)
+	elif dictVersion["Category"] == "Measurement":
+		return dictToMeas(dictVersion)
+	else:
+		raise ValueError("Invalid dictionary")
+
+outputDicts = [
 	{
 		'Category': 'Characteristic',
 		'Name': 'read_1',
@@ -17,7 +53,8 @@ output = [
 		'Long Identifier': '',
 		'VCU Type': 'FLOAT32_IEEE',
 		'Type': 'single',
-		'Resolution': 0, 'Accuracy': 0,
+		'Resolution': 0, 
+		'Accuracy': 0,
 		'Lower Limit': -3.4e+38,
 		'Upper Limit': 3.4e+38,
 		'Address': 1073774596
@@ -59,3 +96,7 @@ output = [
 		'Address': 1073774593
 	}
 ]
+
+output = []
+for i in outputDicts:
+	output.append(dictToClass(i))
