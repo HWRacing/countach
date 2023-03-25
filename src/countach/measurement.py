@@ -16,7 +16,7 @@ def measurementFromDict(d):
 	return Measurement(
 		d["name"],
 		d["longIdentifier"],
-    	d["vcuType"],
+		d["vcuType"],
 		d["dataType"],
 		d["resolution"],
 		d["accuracy"],
