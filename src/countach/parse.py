@@ -1,4 +1,4 @@
-from countach import characteristic, measurement, types
+from countach import characteristic, measurement, types, fileops
 
 def _parseLongID(rawText):
 	if rawText == '""':
@@ -67,4 +67,11 @@ def parseSection(section):
 		output = parseMSection(section)
 	else:
 		raise RuntimeError("parseSection only accepts CHARACTERISTIC or MEASUREMENT sections")
+	return output
+
+def parseFile(fileName):
+	sections = fileops.fileToSections(fileName)
+	output = []
+	for section in sections:
+		output.append(parseSection(section))
 	return output
