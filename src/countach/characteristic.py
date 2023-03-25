@@ -5,9 +5,9 @@ class Characteristic:
 	name: str
 	longIdentifier: str
 	vcuType: str
+	address: int
+	recordLayout: str
+	maxDifference: int
 	dataType: str
-	resolution: int
-	accuracy: int
 	lowerLimit: float
 	upperLimit: float
-	address: int
