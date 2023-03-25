@@ -1,99 +1,73 @@
 from countach import measurement, characteristic
 
-def dictToCharac(n):
-	output = characteristic.Characteristic()
-	output.name = n["Name"]
-	output.longIdentifier = n["Long Identifier"]
-	output.vcuType = n["VCU Type"]
-	output.address = n["Address"]
-	output.recordLayout = n["Record Layout"]
-	output.maxDifference = n["Maximum Difference"]
-	output.dataType = n["Type"]
-	output.lowerLimit = n["Lower Limit"]
-	output.upperLimit = n["Upper Limit"]
-	return output
-
-def dictToMeas(n):
-	output = measurement.Measurement
-	output.name = n["Name"]
-	output.longIdentifier = n["Long Identifier"]
-	output.vcuType = n["VCU Type"]
-	output.dataType = n["Type"]
-	output.resolution = n["Resolution"]
-	output.accuracy = n["Accuracy"]
-	output.lowerLimit = n["Lower Limit"]
-	output.upperLimit = n["Upper Limit"]
-	output.address = n["Address"]
-	return output
-
 def dictToClass(dictVersion):
 	if dictVersion["Category"] == "Characteristic":
-		return dictToCharac(dictVersion)
+		return characteristic.characteristicFromDict(dictVersion)
 	elif dictVersion["Category"] == "Measurement":
-		return dictToMeas(dictVersion)
+		return measurement.measurementFromDict(dictVersion)
 	else:
 		raise ValueError("Invalid dictionary")
 
 outputDicts = [
 	{
-		'Category': 'Characteristic',
-		'Name': 'read_1',
-		'Long Identifier': '',
-		'VCU Type': 'VALUE',
-		'Address': 16580608,
-		'Record Layout': 'Scalar_FLOAT32_IEEE',
-		'Maximum Difference': 0,
-		'Type': 'single',
-		'Lower Limit': -3.4e+38,
-		'Upper Limit': 3.4e+38
+		'Category': "Characteristic",
+		'name': 'read_1',
+		'longIdentifier': '',
+		'vcuType': 'VALUE',
+		'address': 16580608,
+		'recordLayout': 'Scalar_FLOAT32_IEEE',
+		'maxDifference': 0,
+		'dataType': 'single',
+		'lowerLimit': -3.4e+38,
+		'upperLimit': 3.4e+38
 	},
 	{
-		'Category': 'Measurement',
-		'Name': 'write_1',
-		'Long Identifier': '',
-		'VCU Type': 'FLOAT32_IEEE',
-		'Type': 'single',
-		'Resolution': 0, 
-		'Accuracy': 0,
-		'Lower Limit': -3.4e+38,
-		'Upper Limit': 3.4e+38,
-		'Address': 1073774596
+		'Category': "Measurement",
+		'name': 'write_1',
+		'longIdentifier': '',
+		'vcuType': 'FLOAT32_IEEE',
+		'dataType': 'single',
+		'resolution': 0, 
+		'accuracy': 0,
+		'lowerLimit': -3.4e+38,
+		'upperLimit': 3.4e+38,
+		'address': 1073774596
 	},
 	{
-		'Category': 'Measurement',
-		'Name': 'write_2',
-		'Long Identifier': '',
-		'VCU Type': 'UBYTE',
-		'Type': 'boolean',
-		'Resolution': 0,
-		'Accuracy': 0,
-		'Lower Limit': 0.0,
-		'Upper Limit': 1.0,
-		'Address': 1073774600
+		'Category': "Measurement",
+		'name': 'write_2',
+		'longIdentifier': '',
+		'vcuType': 'UBYTE',
+		'dataType': 'boolean',
+		'resolution': 0,
+		'accuracy': 0,
+		'lowerLimit': 0.0,
+		'upperLimit': 1.0,
+		'address': 1073774600
 	}, 
 	{
-		'Category': 'Measurement',
-		'Name': 'PwrM_flgKeyOnDelay',
-		'Long Identifier': '',
-		'VCU Type': 'UBYTE',
-		'Type': 'boolean',
-		'Resolution': 0,
-		'Accuracy': 0,
-		'Lower Limit': 0.0,
-		'Upper Limit': 1.0,
-		'Address': 1073774592
+		'Category': "Measurement",
+		'name': 'PwrM_flgKeyOnDelay',
+		'longIdentifier': '',
+		'vcuType': 'UBYTE',
+		'dataType': 'boolean',
+		'resolution': 0,
+		'accuracy': 0,
+		'lowerLimit': 0.0,
+		'upperLimit': 1.0,
+		'address': 1073774592
 	},
 	{
-		'Category': 'Measurement',
-		'Name': 'PwrM_flgKeyOnRaw',
-		'Long Identifier': '',
-		'VCU Type': 'UBYTE',
-		'Type':'boolean',
-		'Resolution': 0,
-		'Accuracy': 0,
-		'Lower Limit': 0.0,
-		'Upper Limit': 1.0,
-		'Address': 1073774593
+		'Category': "Measurement",
+		'name': 'PwrM_flgKeyOnRaw',
+		'longIdentifier': '',
+		'vcuType': 'UBYTE',
+		'dataType':'boolean',
+		'resolution': 0,
+		'accuracy': 0,
+		'lowerLimit': 0.0,
+		'upperLimit': 1.0,
+		'address': 1073774593
 	}
 ]
 
