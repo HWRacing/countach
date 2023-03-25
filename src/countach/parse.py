@@ -8,55 +8,53 @@ def _parseLongID(rawText):
 
 # Parse a CHARACTERISTIC section
 def parseCSection(section):
-	current = characteristic.Characteristic()
-
+	dictVersion = {}
 	for rawLine in section:
 		line = rawLine.split()
 		if line[1] == "Name":
-			current.name = line[3]
+			dictVersion["name"] = line[3]
 		elif line[1] == "Long":
-			current.longIdentifier = _parseLongID(line[4])
+			dictVersion["longIdentifier"] = _parseLongID(line[4])
 		elif line[1] == "Type":
-			current.vcuType = line[3]
+			dictVersion["vcuType"] = line[3]
 		elif line[1] == "ECU":
-			current.address = int(line[4], 16)
+			dictVersion["address"] = int(line[4], 16)
 		elif line[1] == "Record":
-			current.recordLayout = line[4]
+			dictVersion["recordLayout"] = line[4]
 		elif line[1] == "Maximum":
-			current.maxDifference = int(line[4])
+			dictVersion["maxDifference"] = int(line[4])
 		elif line[1] == "Conversion":
-			current.dataType = types.getTypeFromRawString(line[4])
+			dictVersion["dataType"] = types.getTypeFromRawString(line[4])
 		elif line[1] == "Lower":
-			current.lowerLimit = float(line[4])
+			dictVersion["lowerLimit"] = float(line[4])
 		elif line[1] == "Upper":
-			current.upperLimit = float(line[4])
-	
-	return current
+			dictVersion["upperLimit"] = float(line[4])
+	return characteristic.characteristicFromDict(dictVersion)
 
 # Parse a MEASUREMENT section
 def parseMSection(section):
-	current = measurement.Measurement()
-
+	dictVersion = {}
 	for rawLine in section:
 		line = rawLine.split()
 		if line[1] == "Name":
-			current.name = line[3]
+			dictVersion["name"] = line[3]
 		elif line[1] == "Long":
-			current.longIdentifier = _parseLongID(line[4])
+			dictVersion["longIdentifier"] = _parseLongID(line[4])
 		elif line[1] == "Data":
-			current.vcuType = line[4]
+			dictVersion["vcuType"] = line[4]
 		elif line[1] == "Conversion":
-			current.dataType = types.getTypeFromRawString(line[4])
+			dictVersion["dataType"] = types.getTypeFromRawString(line[4])
 		elif line[1] == "Resolution":
-			current.resolution = int(line[5])
+			dictVersion["resolution"] = int(line[5])
 		elif line[1] == "Accuracy":
-			current.accuracy = int(line[5])
+			dictVersion["accuracy"] = int(line[5])
 		elif line[1] == "Lower":
-			current.lowerLimit = float(line[4])
+			dictVersion["lowerLimit"] = float(line[4])
 		elif line[1] == "Upper":
-			current.upperLimit = float(line[4])
+			dictVersion["upperLimit"] = float(line[4])
 		elif line[0] == "ECU_ADDRESS":
-			current.address = int(line[1], 16)
+			dictVersion["address"] = int(line[1], 16)
+	return measurement.measurementFromDict(dictVersion)
 
 def _parseSection(section):
 	sectionType = section[0].split()[1]
