@@ -57,3 +57,14 @@ def parseMSection(section):
 			current.upperLimit = float(line[4])
 		elif line[0] == "ECU_ADDRESS":
 			current.address = int(line[1], 16)
+
+def parseSection(section):
+	sectionType = section[0].split()[1]
+	output = None
+	if sectionType == "CHARACTERISTIC":
+		output = parseCSection(section)
+	elif sectionType == "MEASUREMENT":
+		output = parseMSection(section)
+	else:
+		raise RuntimeError("parseSection only accepts CHARACTERISTIC or MEASUREMENT sections")
+	return output
