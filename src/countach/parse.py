@@ -58,7 +58,7 @@ def parseMSection(section):
 		elif line[0] == "ECU_ADDRESS":
 			current.address = int(line[1], 16)
 
-def parseSection(section):
+def _parseSection(section):
 	sectionType = section[0].split()[1]
 	output = None
 	if sectionType == "CHARACTERISTIC":
@@ -73,5 +73,5 @@ def parseFile(fileName):
 	sections = fileops.fileToSections(fileName)
 	output = []
 	for section in sections:
-		output.append(parseSection(section))
+		output.append(_parseSection(section))
 	return output
