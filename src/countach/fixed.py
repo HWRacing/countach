@@ -1,3 +1,5 @@
+from typing import Tuple
+
 # Given a string that starts with an integer, returns the integer
 def _extractInitialInt(source: str) -> int:
 	if source.isnumeric():
@@ -11,7 +13,7 @@ def _extractInitialInt(source: str) -> int:
 			break
 	
 	if firstNonNumeric == 0:
-		return None
+		return 0
 
 	return int(source[:firstNonNumeric])
 
@@ -27,8 +29,8 @@ def _checkIfFixedIsSigned(typeString: str) -> bool:
 def _getWordLength(typeString: str) -> int:
 	# Remove unneccessary data
 	typeString = typeString[4:]
-	typeString = typeString.split("_")
-	return int(typeString[0])
+	splitTypeString = typeString.split("_")
+	return int(splitTypeString[0])
 
 # TODO: Check if negative total slopes possible?
 def _getTotalSlope(typeString: str) -> int:
@@ -50,7 +52,7 @@ def _getBias(typeString: str) -> int:
 		bias = _extractInitialInt(typeString[bIndex:])
 	return bias
 
-def _getFixedTypeParameters(typeString: str) -> tuple:
+def _getFixedTypeParameters(typeString: str) -> Tuple[bool, int, int, int]:
 	signed = _checkIfFixedIsSigned(typeString)
 	wordLength = _getWordLength(typeString)
 	totalSlope = _getTotalSlope(typeString)
