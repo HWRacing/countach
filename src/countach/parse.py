@@ -1,7 +1,7 @@
 from countach import characteristic as ch
 from countach import measurement as mea 
 from countach import types, fileops
-from typing import Union, List
+from typing import Union, List, Dict
 
 def _parseLongID(rawText: str) -> str:
 	if rawText == '""':
@@ -11,7 +11,7 @@ def _parseLongID(rawText: str) -> str:
 
 # Parse a CHARACTERISTIC section
 def parseCSection(section: List[str]) -> ch.Characteristic:
-	dictVersion = {}
+	dictVersion: Dict[str, Union[str, int, float]] = {}
 	for rawLine in section:
 		line = rawLine.split()
 		if line[1] == "Name":
@@ -36,7 +36,7 @@ def parseCSection(section: List[str]) -> ch.Characteristic:
 
 # Parse a MEASUREMENT section
 def parseMSection(section: List[str]) -> mea.Measurement:
-	dictVersion = {}
+	dictVersion: Dict[str, Union[str, int, float]] = {}
 	for rawLine in section:
 		line = rawLine.split()
 		if line[1] == "Name":
