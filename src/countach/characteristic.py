@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Dict
 
 @dataclass
 class Characteristic:
@@ -12,7 +13,7 @@ class Characteristic:
 	lowerLimit: float
 	upperLimit: float
 
-def characteristicFromDict(d):
+def characteristicFromDict(d) -> Characteristic:
 	return Characteristic(
 		d["name"],
 		d["longIdentifier"],

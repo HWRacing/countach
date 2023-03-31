@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import TypedDict
 
 @dataclass
 class Measurement:
@@ -12,7 +13,7 @@ class Measurement:
 	upperLimit: float
 	address: int
 
-def measurementFromDict(d):
+def measurementFromDict(d) -> Measurement:
 	return Measurement(
 		d["name"],
 		d["longIdentifier"],

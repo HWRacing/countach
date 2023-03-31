@@ -1,10 +1,12 @@
-def _importFile(fileName: str) -> list:
+from typing import List
+
+def _importFile(fileName: str) -> List[str]:
 	with open(fileName, "r") as f:
 		lines = f.readlines()
 	return lines
 
 # Take the whole a2l file and extract the lines containing measurement or characteristic sections
-def _linesToSections(lines: list) -> list:
+def _linesToSections(lines: List[str]) -> List[List[str]]:
 	# Whether or not the current line is inside a section
 	inSection = False
 	output = []
@@ -26,6 +28,6 @@ def _linesToSections(lines: list) -> list:
 
 	return output
 
-def fileToSections(fileName: str) -> list:
+def fileToSections(fileName: str) -> List[List[str]]:
 	lines = _importFile(fileName)
 	return _linesToSections(lines)
