@@ -1,6 +1,6 @@
 from countach import fixed
 
-def getTypeFromRawString(rawString):
+def getTypeFromRawString(rawString: str) -> str:
 	typeList = [
 	"uint8", 
 	"uint16", 

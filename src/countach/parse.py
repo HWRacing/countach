@@ -1,13 +1,16 @@
-from countach import characteristic, measurement, types, fileops
+from countach import characteristic as ch
+from countach import measurement as mea 
+from countach import types, fileops
+from typing import Union
 
-def _parseLongID(rawText):
+def _parseLongID(rawText: str) -> str:
 	if rawText == '""':
 		return ""
 	else:
 		return rawText
 
 # Parse a CHARACTERISTIC section
-def parseCSection(section):
+def parseCSection(section: list) -> ch.Characteristic:
 	dictVersion = {}
 	for rawLine in section:
 		line = rawLine.split()
@@ -29,10 +32,10 @@ def parseCSection(section):
 			dictVersion["lowerLimit"] = float(line[4])
 		elif line[1] == "Upper":
 			dictVersion["upperLimit"] = float(line[4])
-	return characteristic.characteristicFromDict(dictVersion)
+	return ch.characteristicFromDict(dictVersion)
 
 # Parse a MEASUREMENT section
-def parseMSection(section):
+def parseMSection(section: list) -> mea.Measurement:
 	dictVersion = {}
 	for rawLine in section:
 		line = rawLine.split()
@@ -54,9 +57,9 @@ def parseMSection(section):
 			dictVersion["upperLimit"] = float(line[4])
 		elif line[0] == "ECU_ADDRESS":
 			dictVersion["address"] = int(line[1], 16)
-	return measurement.measurementFromDict(dictVersion)
+	return mea.measurementFromDict(dictVersion)
 
-def _parseSection(section):
+def _parseSection(section: list) -> Union[ch.Characteristic, mea.Measurement]:
 	sectionType = section[0].split()[1]
 	output = None
 	if sectionType == "CHARACTERISTIC":
@@ -67,7 +70,7 @@ def _parseSection(section):
 		raise RuntimeError("parseSection only accepts CHARACTERISTIC or MEASUREMENT sections")
 	return output
 
-def parseFile(fileName):
+def parseFile(fileName: str) -> list:
 	sections = fileops.fileToSections(fileName)
 	output = []
 	for section in sections:
