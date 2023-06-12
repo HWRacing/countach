@@ -13,7 +13,7 @@ def _linesToSections(lines: List[str]) -> List[List[str]]:
 	currentOutput = []
 	for rawline in lines:
 		# Remove leading and trailing whitespace
-		line = rawline.lstrip()[:-1]
+		line = rawline.strip()
 
 		if line == "/begin CHARACTERISTIC" or line == "/begin MEASUREMENT":
 			inSection = True
