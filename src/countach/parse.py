@@ -80,6 +80,9 @@ def parseMemSection(section: List[str]) -> memseg.MemorySegment:
 	dictVersion["size"] = int(section[6], 16)
 	dictVersion["offset"] = tuple([[int(num) for num in section[7].split()]])
 	# TODO: mapping
+	for line in section:
+		if "ADDRESS_MAPPING" in line:
+			dictVersion["mapping"] = parseAddressMapping(line)
 	return memseg.memorySegmentFromDict(dictVersion)
 
 def _parseSection(section: List[str]) -> Union[ch.Characteristic, mea.Measurement]:
