@@ -61,6 +61,13 @@ def parseMSection(section: List[str]) -> mea.Measurement:
 			dictVersion["address"] = int(line[1], 16)
 	return mea.measurementFromDict(dictVersion)
 
+def parseAddressMapping(mappingLine: str) -> amap.AddressMapping:
+	mapping = mappingLine.split()
+	originalAddress = int(mapping[2], 16)
+	mappingAddress = int(mapping[4], 16)
+	length = int(mapping[6], 16)
+	return amap.AddressMapping(originalAddress, mappingAddress, length)
+
 def parseMemSection(section: List[str]) -> memseg.MemorySegment:
 	dictVersion: Dict[str, Union[str, int, Tuple[int, int, int, int, int], amap.AddressMapping]] = {}
 	
