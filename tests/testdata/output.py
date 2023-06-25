@@ -1,14 +1,63 @@
-from countach import measurement, characteristic
+from countach import measurement, characteristic, memorySegment, addressMapping
 
 def dictToClass(dictVersion):
 	if dictVersion["Category"] == "Characteristic":
 		return characteristic.characteristicFromDict(dictVersion)
 	elif dictVersion["Category"] == "Measurement":
 		return measurement.measurementFromDict(dictVersion)
+	elif dictVersion["Category"] == "Memory Segment":
+		return memorySegment.memorySegmentFromDict(dictVersion)
 	else:
 		raise ValueError("Invalid dictionary")
 
+mapping = addressMapping.AddressMapping(0x00FD0000, 0x40000000, 0x00008000)
+
 outputDicts = [
+	{
+		'Category': "Memory Segment",
+		'name': '_RAMCAL',
+		'longIdentifier': 'calibration_ram',
+		'programType': 'DATA',
+		'memoryType': 'RAM',
+		'attribute': 'INTERN',
+		'address': 0x40000000,
+		'size': 0x00008000,
+		'offset': (-1, -1, -1, -1, -1)
+	},
+	{
+		'Category': "Memory Segment",
+		'name': '_ROMCAL',
+		'longIdentifier': 'calibration_rom',
+		'programType': 'DATA',
+		'memoryType': 'FLASH',
+		'attribute': 'INTERN',
+		'address': 0x00FD0000,
+		'size': 0x00008000,
+		'offset': (-1, -1, -1, -1, -1),
+		'mapping': mapping
+	},
+	{
+		'Category': "Memory Segment",
+		'name': '_RAMMSR',
+		'longIdentifier': 'measurement_ram',
+		'programType': 'DATA',
+		'memoryType': 'RAM',
+		'attribute': 'INTERN',
+		'address': 0x40000000,
+		'size': 0x00060000,
+		'offset': (-1, -1, -1, -1, -1)
+	},
+	{
+		'Category': "Memory Segment",
+		'name': '_CODE',
+		'longIdentifier': 'ecu_code',
+		'programType': 'CODE',
+		'memoryType': 'FLASH',
+		'attribute': 'INTERN',
+		'address': 0x01000008,
+		'size': 0x1FE000,
+		'offset': (-1, -1, -1, -1, -1)
+	},
 	{
 		'Category': "Characteristic",
 		'name': 'read_1',
