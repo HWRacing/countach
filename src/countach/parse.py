@@ -2,7 +2,7 @@ from countach import characteristic as ch
 from countach import measurement as mea 
 from countach import memorySegment as memseg
 from countach import types, fileops
-from typing import Union, List, Dict
+from typing import Union, List, Dict, Tuple
 
 def _parseLongID(rawText: str) -> str:
 	if rawText == '""':
@@ -61,7 +61,7 @@ def parseMSection(section: List[str]) -> mea.Measurement:
 	return mea.measurementFromDict(dictVersion)
 
 def parseMemSection(section: List[str]) -> memseg.MemorySegment:
-	dictVersion: Dict[str, Union[str, int]] = {}
+	dictVersion: Dict[str, Union[str, int, Tuple[int, int, int, int, int]]] = {}
 	
 	dictVersion["name"] = section[0].split()[-1]
 	dictVersion["longIdentifier"] = _parseLongID(section[1]).replace('"', "")
@@ -70,7 +70,7 @@ def parseMemSection(section: List[str]) -> memseg.MemorySegment:
 	dictVersion["attribute"] = section[4]
 	dictVersion["address"] = int(section[5], 16)
 	dictVersion["size"] = int(section[6], 16)
-	# TODO: offset
+	dictVersion["offset"] = tuple([[int(num) for num in section[7].split()]])
 	# TODO: mapping
 	return memseg.memorySegmentFromDict(dictVersion)
 
