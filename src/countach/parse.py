@@ -96,7 +96,7 @@ def _parseSection(section: List[str]) -> Union[ch.Characteristic, mea.Measuremen
 	else:
 		raise RuntimeError("parseSection only accepts CHARACTERISTIC or MEASUREMENT sections")
 
-def parseFile(fileName: str) -> List[Union[ch.Characteristic, mea.Measurement]]:
+def parseFile(fileName: str) -> List[Union[ch.Characteristic, mea.Measurement, memseg.MemorySegment]]:
 	sections = fileops.fileToSections(fileName)
 	output = []
 	for section in sections:
