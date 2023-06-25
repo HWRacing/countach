@@ -1,7 +1,9 @@
 from countach import characteristic as ch
 from countach import measurement as mea 
+from countach import memorySegment as memseg
+from countach import addressMapping as amap
 from countach import types, fileops
-from typing import Union, List, Dict
+from typing import Union, List, Dict, Tuple
 
 def _parseLongID(rawText: str) -> str:
 	if rawText == '""':
@@ -59,16 +61,40 @@ def parseMSection(section: List[str]) -> mea.Measurement:
 			dictVersion["address"] = int(line[1], 16)
 	return mea.measurementFromDict(dictVersion)
 
+def parseAddressMapping(mappingLine: str) -> amap.AddressMapping:
+	mapping = mappingLine.split()
+	originalAddress = int(mapping[2], 16)
+	mappingAddress = int(mapping[4], 16)
+	length = int(mapping[6], 16)
+	return amap.AddressMapping(originalAddress, mappingAddress, length)
+
+def parseMemSection(section: List[str]) -> memseg.MemorySegment:
+	dictVersion: Dict[str, Union[str, int, Tuple[int, int, int, int, int], amap.AddressMapping]] = {}
+	dictVersion["name"] = section[0].split()[-1]
+	dictVersion["longIdentifier"] = _parseLongID(section[1]).replace('"', "")
+	dictVersion["programType"] = section[2]
+	dictVersion["memoryType"] = section[3]
+	dictVersion["attribute"] = section[4]
+	dictVersion["address"] = int(section[5], 16)
+	dictVersion["size"] = int(section[6], 16)
+	dictVersion["offset"] = tuple([int(num) for num in section[7].split()])
+	for line in section:
+		if "ADDRESS_MAPPING" in line:
+			dictVersion["mapping"] = parseAddressMapping(line)
+	return memseg.memorySegmentFromDict(dictVersion)
+
 def _parseSection(section: List[str]) -> Union[ch.Characteristic, mea.Measurement]:
 	sectionType = section[0].split()[1]
 	if sectionType == "CHARACTERISTIC":
 		return parseCSection(section)
 	elif sectionType == "MEASUREMENT":
 		return parseMSection(section)
+	elif sectionType == "MEMORY_SEGMENT":
+		return parseMemSection(section)
 	else:
 		raise RuntimeError("parseSection only accepts CHARACTERISTIC or MEASUREMENT sections")
 
-def parseFile(fileName: str) -> List[Union[ch.Characteristic, mea.Measurement]]:
+def parseFile(fileName: str) -> List[Union[ch.Characteristic, mea.Measurement, memseg.MemorySegment]]:
 	sections = fileops.fileToSections(fileName)
 	output = []
 	for section in sections:

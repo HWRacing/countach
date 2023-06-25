@@ -15,9 +15,9 @@ def _linesToSections(lines: List[str]) -> List[List[str]]:
 		# Remove leading and trailing whitespace
 		line = rawline.strip()
 
-		if line == "/begin CHARACTERISTIC" or line == "/begin MEASUREMENT":
+		if line == "/begin CHARACTERISTIC" or line == "/begin MEASUREMENT" or "/begin MEMORY_SEGMENT" in line:
 			inSection = True
-		elif line == "/end CHARACTERISTIC" or line == "/end MEASUREMENT":
+		elif line == "/end CHARACTERISTIC" or line == "/end MEASUREMENT" or line == "/end MEMORY_SEGMENT":
 			inSection = False
 			currentOutput.append(line)
 			output.append(currentOutput)
