@@ -70,7 +70,6 @@ def parseAddressMapping(mappingLine: str) -> amap.AddressMapping:
 
 def parseMemSection(section: List[str]) -> memseg.MemorySegment:
 	dictVersion: Dict[str, Union[str, int, Tuple[int, int, int, int, int], amap.AddressMapping]] = {}
-	
 	dictVersion["name"] = section[0].split()[-1]
 	dictVersion["longIdentifier"] = _parseLongID(section[1]).replace('"', "")
 	dictVersion["programType"] = section[2]
@@ -79,7 +78,6 @@ def parseMemSection(section: List[str]) -> memseg.MemorySegment:
 	dictVersion["address"] = int(section[5], 16)
 	dictVersion["size"] = int(section[6], 16)
 	dictVersion["offset"] = tuple([[int(num) for num in section[7].split()]])
-	# TODO: mapping
 	for line in section:
 		if "ADDRESS_MAPPING" in line:
 			dictVersion["mapping"] = parseAddressMapping(line)
