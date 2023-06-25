@@ -1,5 +1,6 @@
 from countach import characteristic as ch
 from countach import measurement as mea 
+from countach import memorySegment as memseg
 from countach import types, fileops
 from typing import Union, List, Dict
 
@@ -59,12 +60,28 @@ def parseMSection(section: List[str]) -> mea.Measurement:
 			dictVersion["address"] = int(line[1], 16)
 	return mea.measurementFromDict(dictVersion)
 
+def parseMemSection(section: List[str]) -> memseg.MemorySegment:
+	dictVersion: Dict[str, Union[str, int]] = {}
+	
+	dictVersion["name"] = section[0].split()[-1]
+	dictVersion["longIdentifier"] = _parseLongID(section[1]).replace('"', "")
+	dictVersion["programType"] = section[2]
+	dictVersion["memoryType"] = section[3]
+	dictVersion["attribute"] = section[4]
+	dictVersion["address"] = int(section[5], 16)
+	dictVersion["size"] = int(section[6], 16)
+	# TODO: offset
+	# TODO: mapping
+	return memseg.memorySegmentFromDict(dictVersion)
+
 def _parseSection(section: List[str]) -> Union[ch.Characteristic, mea.Measurement]:
 	sectionType = section[0].split()[1]
 	if sectionType == "CHARACTERISTIC":
 		return parseCSection(section)
 	elif sectionType == "MEASUREMENT":
 		return parseMSection(section)
+	elif sectionType == "MEMORY_SEGMENT":
+		return parseMemSection(section)
 	else:
 		raise RuntimeError("parseSection only accepts CHARACTERISTIC or MEASUREMENT sections")
 
