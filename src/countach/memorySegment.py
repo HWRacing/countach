@@ -15,14 +15,27 @@ class MemorySegment:
 	mapping: addressMapping.AddressMapping
 
 def memorySegmentFromDict(d) -> MemorySegment:
-	return MemorySegment(
-		d["name"],
-		d["longIdentifier"],
-		d["programType"],
-		d["memoryType"],
-		d["attribute"],
-		d["address"],
-		d["size"],
-		d["offset"],
-		d["mapping"]
-	)
+	if "mapping" in d:
+		return MemorySegment(
+			d["name"],
+			d["longIdentifier"],
+			d["programType"],
+			d["memoryType"],
+			d["attribute"],
+			d["address"],
+			d["size"],
+			d["offset"],
+			d["mapping"]
+		)
+	else:
+		return MemorySegment(
+			d["name"],
+			d["longIdentifier"],
+			d["programType"],
+			d["memoryType"],
+			d["attribute"],
+			d["address"],
+			d["size"],
+			d["offset"],
+			None
+		)
