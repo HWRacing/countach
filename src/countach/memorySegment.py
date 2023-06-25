@@ -14,3 +14,15 @@ class MemorySegment:
 	offset: Tuple[int, int, int, int, int]
 	mapping: addressMapping.AddressMapping
 
+def memorySegmentFromDict(d) -> MemorySegment:
+	return MemorySegment(
+		d["name"],
+		d["longIdentifier"],
+		d["programType"],
+		d["memoryType"],
+		d["attrinute"],
+		d["address"],
+		d["size"],
+		d["offset"],
+		d["mapping"]
+	)
