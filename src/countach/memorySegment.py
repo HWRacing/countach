@@ -20,7 +20,7 @@ def memorySegmentFromDict(d) -> MemorySegment:
 		d["longIdentifier"],
 		d["programType"],
 		d["memoryType"],
-		d["attrinute"],
+		d["attribute"],
 		d["address"],
 		d["size"],
 		d["offset"],
