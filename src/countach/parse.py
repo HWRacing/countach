@@ -1,6 +1,7 @@
 from countach import characteristic as ch
 from countach import measurement as mea 
 from countach import memorySegment as memseg
+from countach import addressMapping as amap
 from countach import types, fileops
 from typing import Union, List, Dict, Tuple
 
@@ -61,7 +62,7 @@ def parseMSection(section: List[str]) -> mea.Measurement:
 	return mea.measurementFromDict(dictVersion)
 
 def parseMemSection(section: List[str]) -> memseg.MemorySegment:
-	dictVersion: Dict[str, Union[str, int, Tuple[int, int, int, int, int]]] = {}
+	dictVersion: Dict[str, Union[str, int, Tuple[int, int, int, int, int], amap.AddressMapping]] = {}
 	
 	dictVersion["name"] = section[0].split()[-1]
 	dictVersion["longIdentifier"] = _parseLongID(section[1]).replace('"', "")
